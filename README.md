@@ -1,4 +1,4 @@
-# Project Name
+# Ubikwitus
 Ubikwitus is a tool designed to make predictions on the biological activity of potential cancer drug candidates.
 
 ## Description
