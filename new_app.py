@@ -1,11 +1,13 @@
 import pandas as pd
+import numpy as np
 import streamlit as st
 from PIL import Image
 import subprocess
 import os
 import base64
 import pickle
-
+import joblib
+#from sklearn.externals import joblib
 
 # Title of the app
 st.title("🌟 AI Model Prediction App 🌟")
@@ -77,7 +79,7 @@ def filedownload(df):
 
 def build_model(input_data):
     # Reads in saved regression model
-    load_model = pickle.load(open('random_forest_model.pkl', 'rb'))
+    load_model = joblib.load('random_forest_model.pkl')
     # Apply model to make predictions
     prediction = load_model.predict(input_data)
     st.header('**Prediction output**')
@@ -93,7 +95,8 @@ with st.sidebar.header('1. Upload your CSV data'):
     st.sidebar.markdown("""
 [Example input file](https://raw.githubusercontent.com/dataprofessor/bioactivity-prediction-app/main/example_acetylcholinesterase.txt)
 """)
-    
+    if 'uploaded_file' not in st.session_state:
+        st.session_state['uploaded_file']=''
 
 # Button to trigger prediction
 if st.sidebar.button('Predict'):
